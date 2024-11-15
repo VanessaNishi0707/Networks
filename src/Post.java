@@ -7,10 +7,12 @@ public class Post {
     Date creationTime;
     List<View> views;
     List<Comment> comments;
+    User user;
 
-    public Post(String content, Date creationTime) {
+    public Post(String content, Date creationTime, User user) {
         this.content = content;
         this.creationTime = creationTime;
+        this.user = user;
         this.views = new ArrayList<>();
         this.comments = new ArrayList<>();
     }
@@ -33,5 +35,13 @@ public class Post {
 
     public Date getCreationTime() {
         return creationTime;
+    }
+
+    public User getUser () {
+        return user;
+    }
+
+    public String getContent() {
+        return content;
     }
 }
