@@ -7,7 +7,7 @@ public class TrendingPosts {
     // Calculate the rate of views or comments per hour for a given post
     public static double calculateTrendingScore(Post post, boolean byViews) {
         long elapsedTimeInMillis = new Date().getTime() - post.getCreationTime().getTime();
-        long elapsedTimeInHours = elapsedTimeInMillis / (1000 * 60 * 60); // Convert ms to hours
+        long elapsedTimeInHours = elapsedTimeInMillis / (1000 * 60 * 60);
         if (elapsedTimeInHours == 0) elapsedTimeInHours = 1; // Avoid division by zero
 
         if (byViews) {
@@ -19,7 +19,7 @@ public class TrendingPosts {
 
     // Generate a report of trending posts based on views or comments
     public static List<Post> getTrendingPosts(List<Post> posts, boolean byViews) {
-        // Sort posts by their trending score (views or comments per hour)
+        // Sort posts
         posts.sort((p1, p2) -> Double.compare(calculateTrendingScore(p2, byViews), calculateTrendingScore(p1, byViews)));
         return posts;
     }
@@ -34,7 +34,7 @@ public class TrendingPosts {
         post1.addView(new View(new Date(System.currentTimeMillis() - 200000000))); // View 2
         post2.addView(new View(new Date(System.currentTimeMillis() - 30000000))); // View 3
 
-        // Adding comments to the posts
+        // Adding comments
         post1.addComment(new Comment("user1", "Great post!", new Date(System.currentTimeMillis() - 500000000)));
         post2.addComment(new Comment("user2", "Very informative!", new Date(System.currentTimeMillis() - 10000000)));
 
