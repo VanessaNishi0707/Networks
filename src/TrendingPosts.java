@@ -83,6 +83,7 @@ public class TrendingPosts {
         for (Post post : filteredPosts) {
             System.out.println(post.getContent());
         }
+        System.out.println("Number of posts containing keywords: " + filteredPosts.size());
 
         // Filter posts by user attributes
         List<Post> filteredByUserAttributes = filterPostsByUserAttributes(posts, 25, "male", null);
@@ -90,6 +91,7 @@ public class TrendingPosts {
         for (Post post : filteredByUserAttributes) {
             System.out.println(post.getContent());
         }
+        System.out.println("Number of posts filtered by user attributes: " + filteredByUserAttributes.size());
 
         // Get trending posts by views
         List<Post> trendingPostsByViews = getTrendingPosts(posts, true);
