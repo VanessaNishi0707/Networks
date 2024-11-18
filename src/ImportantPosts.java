@@ -5,36 +5,27 @@ import java.util.Collection;
 import java.util.NoSuchElementException;
 import java.io.PrintWriter;
 import java.io.FileWriter; 
+import java.io.*;
+import java.util.*;
 
+public class ImportantPosts {
 
-public class TestDemo {
+    User user1;
+    User user2;
 
-    User root;
-    User next;
-
-    public TestDemo() {
-        root = null;
-        next = null;
+    public ImportantPosts() {
     }
 
-    public class User {
-        String name;
-    
-        public User(String name) {
-            this.name = name;
-        }
-    }
 
-    public void set(String s, String t) {
-        root = new User(s);
-        next = new User(t);
+    public void set() {
+        user1 = new User("user1", 20, "F", "NA");
+        user2 = new User("user2", 15, "M", "ASIA");
     }
 
     public void printRoot() {
-        System.out.println(root.name);
     }
 
-    public void writeDot(String filename) {
+    /*public void writeDot(String filename) {
         try {
             PrintWriter output = new PrintWriter(new FileWriter(filename));
 
@@ -52,5 +43,13 @@ public class TestDemo {
 
     private void writeDotRecursive(User root, User next, PrintWriter output) throws Exception {
         output.println(root.name + " -> " + next.name);
+    }*/
+
+    public static void main(String[] args) throws Exception {
+        ImportantPosts test = new ImportantPosts();
+        SampleData data = new SampleData();
+    
+        test.set();
     }
 }
+

@@ -7,7 +7,8 @@ public class Post {
     Date creationTime;
     List<View> views;
     List<Comment> comments;
-    User user;
+    List<User> viewers; // list of users who have viewed
+    User user; // author
 
     public Post(String content, Date creationTime, User user) {
         this.content = content;
@@ -15,6 +16,7 @@ public class Post {
         this.user = user;
         this.views = new ArrayList<>();
         this.comments = new ArrayList<>();
+        this.viewers = new ArrayList<>();
     }
 
     public void addView(View view) {
@@ -23,6 +25,10 @@ public class Post {
 
     public void addComment(Comment comment) {
         comments.add(comment);
+    }
+
+    public void addViewer(User viewer) {
+        viewers.add(viewer);
     }
 
     public long getViewCount() {
