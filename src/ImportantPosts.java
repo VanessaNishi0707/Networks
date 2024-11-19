@@ -71,14 +71,14 @@ public class ImportantPosts {
         System.out.println("The GraphViz files have been created!");
     }
 
-    // Iterates through users & the posts they either create or view and converts data into GraphViz syntaz that is read into a file
+    // Iterates through users & the posts they either create or view and converts data into GraphViz syntax that is read into a file
     // COPY FILE INTO THIS WEBSITE http://www.jdolivet.byethost13.com/Logiciels/WebGraphviz/ to view graph representation, 
-    // Pictures of this particular graph will be attached to assignment submission
+    // Pictures of this particular graph will be attached to the documentation Google Doc
 
     // SYMBOLS: 
     // Circle shape: user, square shape: post, directed edge: connects author->post, undir edge: connects viewer-post
     // Red: Number of comments higher than some num; blue: number of views higher than some num
-    public void createGraph(String filename, String sortBy, int num) {
+    public void createGraph(String filename, String sortBy, boolean greaterOrEqual, int num) {
         try {
             PrintWriter output = new PrintWriter(new FileWriter(filename));
 
@@ -88,27 +88,68 @@ public class ImportantPosts {
                 for (Post element : entry.getValue()) {
                     output.print(entry.getKey().username + " -> ");
                     if (element.user == entry.getKey()) {
-                        if ((sortBy == "numView") && (element.views.size() >= num)) {
-                            output.println(element.content);
-                            output.println(element.content + "[shape=square, color=blue]");
+                        if (sortBy == "numView") {
+                            if ((greaterOrEqual) && (element.views.size() >= num)) {
+                                output.println(element.content);
+                                output.println(element.content + "[shape=square, color=blue]");
+                            }
+                            else if (!(greaterOrEqual) && (element.views.size() < num)) {
+                                output.println(element.content);
+                                output.println(element.content + "[shape=square, color=green]");
+                            }
+                            else {
+                                output.println(element.content);
+                                output.println(element.content + "[shape=square]");
+                            }
                         }
-                        else if ((sortBy == "numComment") && (element.comments.size() >= num)) {
-                            output.println(element.content);
-                            output.println(element.content + "[shape=square, color=red]");
+                        else if (sortBy == "numComment") {
+                            if ((greaterOrEqual) && (element.comments.size() >= num)) {
+                                output.println(element.content);
+                                output.println(element.content + "[shape=square, color=red]");
+                            }
+                            else if (!(greaterOrEqual) && (element.comments.size() < num)) {
+                                output.println(element.content);
+                                output.println(element.content + "[shape=square, color=orange]");
+                            }
+                            else {
+                                output.println(element.content);
+                                output.println(element.content + "[shape=square]");
+                            }
                         }
+                        
                         else {
                             output.println(element.content);
                             output.println(element.content + "[shape=square]");
                         }
                     }
                     else {
-                        if ((sortBy == "numView") && (element.views.size() >= num)) {
-                            output.println(element.content + "[dir=none]");
-                            output.println(element.content + "[shape=square, color=blue]");
+                        if (sortBy == "numView") {
+                            if ((greaterOrEqual) && (element.views.size() >= num)) {
+                                output.println(element.content + "[dir=none]");
+                                output.println(element.content + "[shape=square, color=blue]");
+                            }
+                            else if (!(greaterOrEqual) && (element.views.size() < num)) {
+                                output.println(element.content + "[dir=none]");
+                                output.println(element.content + "[shape=square, color=green]");
+                            }
+                            else {
+                                output.println(element.content + "[dir=none]");
+                                output.println(element.content + "[shape=square]");
+                            }
                         }
-                        else if ((sortBy == "numComment") && (element.comments.size() >= num)) {
-                            output.println(element.content + "[dir=none]");
-                            output.println(element.content + "[shape=square, color=red]");
+                        else if (sortBy == "numComment") {
+                            if ((greaterOrEqual) && (element.comments.size() >= num)) {
+                                output.println(element.content + "[dir=none]");
+                                output.println(element.content + "[shape=square, color=red]");
+                            }
+                            else if (!(greaterOrEqual) && (element.comments.size() < num)) {
+                                output.println(element.content + "[dir=none]");
+                                output.println(element.content + "[shape=square, color=orange]");
+                            }
+                            else {
+                                output.println(element.content + "[dir=none]");
+                                output.println(element.content + "[shape=square]");
+                            }
                         }
                         else {
                             output.println(element.content + "[dir=none]");
@@ -123,21 +164,21 @@ public class ImportantPosts {
         }
         catch(Exception e){e.printStackTrace();}
     }
-    
-    public void graphHighlightByViews(String filename, int numViews) {
-        createGraph(filename, "numView", numViews); 
+
+    public void graphHighlightByViews(String filename, boolean greaterOrEqual, int numViews) {
+        createGraph(filename, "numView", greaterOrEqual, numViews); 
     }
 
-    public void graphHighlightByComments(String filename, int numComments) {
-        createGraph(filename, "numComment", numComments); 
+    public void graphHighlightByComments(String filename, boolean greaterOrEqual, int numComments) {
+        createGraph(filename, "numComment", greaterOrEqual, numComments); 
     }
 
     public static void main(String[] args) throws Exception {
         ImportantPosts data = new ImportantPosts();
         
         data.createData();
-        data.createGraph("plainGraph", null, 0);
-        data.graphHighlightByViews("graphWithView>=2",2);
-        data.graphHighlightByComments("graphWishComment>=4", 4);
+        data.createGraph("plainGraph", null, true, 0);
+        data.graphHighlightByViews("graphWithView>=2", true, 2);
+        data.graphHighlightByComments("graphWishComment>=4", false, 4);
     }
 }
