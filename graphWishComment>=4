@@ -1,0 +1,18 @@
+digraph BST {
+user1 -> post1
+post1[shape=square]
+user1 -> post2[dir=none]
+post2[shape=square]
+user1 -> post3
+post3[shape=square]
+user1 -> post4
+post4[shape=square, color=red]
+user2 -> post1[dir=none]
+post1[shape=square]
+user2 -> post2
+post2[shape=square]
+user2 -> post3[dir=none]
+post3[shape=square]
+user2 -> post4[dir=none]
+post4[shape=square, color=red]
+}
